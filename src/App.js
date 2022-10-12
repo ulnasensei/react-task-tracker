@@ -6,25 +6,29 @@ import AddTask from "./components/addTask/AddTask";
 import { Box, Block } from "react-bulma-components";
 import Tasks from "./components/tasks/Tasks";
 
+const taskList = [];
 function App() {
     const [toggle, setToggle] = useState(true);
+    const [input, setInput] = useState({ task: "", deadline: "" });
+    const [addClick, setAddClick] = useState(false);
+
+    if (addClick) {
+        taskList.push(input);
+        setAddClick(() => false);
+        console.log(taskList);
+    }
 
     return (
         <Box id="box">
             <Header toggle={toggle} setToggle={setToggle} />
-            {toggleAddTask(toggle)}
-            <Block className="tasks">{addTask("test task", "tomorrow")}</Block>
+            {toggle ? <AddTask setInput={setInput} setAddClick={setAddClick} /> : null}
+            <Block className="tasks">
+                {taskList.map((task) => {
+                    return <Tasks key={task} task={task} />;
+                })}
+            </Block>
         </Box>
     );
-}
-
-function toggleAddTask(status) {
-    if (status) {
-        return <AddTask />;
-    }
-}
-function addTask(task, deadline) {
-    return <Tasks task={task} deadline={deadline} />;
 }
 
 export default App;

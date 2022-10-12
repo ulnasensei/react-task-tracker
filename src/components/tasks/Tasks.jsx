@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Message, Button } from "react-bulma-components";
 import "./Tasks.css";
-const Tasks = ({ task, deadline }) => {
+const Tasks = ({ task }) => {
     const [done, setDone] = useState(false);
     const taskStyle = {
         textDecoration: done ? "line-through" : "none",
@@ -15,7 +15,7 @@ const Tasks = ({ task, deadline }) => {
             onClick={() => setDone((current) => !current)}
         >
             <Message.Header className="taskHeader">
-                <span>{deadline}</span>{" "}
+                <span>{task.deadline}</span>{" "}
                 <Button
                     remove
                     onClick={(e) => {
@@ -24,7 +24,7 @@ const Tasks = ({ task, deadline }) => {
                 />
             </Message.Header>
             <Message.Body className="taskBody">
-                <span>{task}</span>
+                <span>{task.task}</span>
             </Message.Body>
         </Message>
     );
