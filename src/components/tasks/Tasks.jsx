@@ -8,7 +8,7 @@ const Tasks = ({ task, deadline }) => {
     };
     return (
         <Message
-            color={done ? "success" : "info"}
+            color={done ? "success" : "link"}
             style={taskStyle}
             size={"full"}
             className="task"

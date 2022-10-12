@@ -5,7 +5,7 @@ const AddButton = (props) => {
     return (
         <>
             <Button
-                color="danger"
+                color="link"
                 className="btn"
                 onClick={() => props.setToggle((current) => !current)}
             >
