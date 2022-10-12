@@ -19,7 +19,7 @@ function App() {
     }
 
     return (
-        <Box id="box">
+        <Box id="box" className="column is-two-fifths">
             <Header toggle={toggle} setToggle={setToggle} />
             {toggle ? <AddTask setInput={setInput} setAddClick={setAddClick} /> : null}
             <Block className="tasks">
