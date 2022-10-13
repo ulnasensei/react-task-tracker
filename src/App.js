@@ -14,7 +14,7 @@ function App() {
 
     if (addClick) {
         taskList.push(input);
-        console.log(input.deadline);
+        console.log(taskList.sort((a, b) => new Date(b.deadline) - new Date(a.deadline)));
         setAddClick(() => false);
         console.log(taskList);
     }
@@ -25,7 +25,7 @@ function App() {
             {toggle ? <AddTask setInput={setInput} setAddClick={setAddClick} /> : null}
             <Block className="tasks">
                 {taskList
-                    .sort((a, b) => (a.datetime > b.datetime ? 1 : -1))
+                    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
                     .map((task) => {
                         return <Tasks key={task} task={task} />;
                     })}
