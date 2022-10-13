@@ -30,7 +30,7 @@ const AddTask = ({ setInput, setAddClick }) => {
                     <Form.Label>Deadline</Form.Label>
                     <Form.Control>
                         <Form.Input
-                            type="text"
+                            type="datetime-local"
                             placeholder="Oct 14, 09:00"
                             value={deadline}
                             onChange={(e) => setDeadline(e.target.value)}

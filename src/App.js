@@ -14,6 +14,7 @@ function App() {
 
     if (addClick) {
         taskList.push(input);
+        console.log(input.deadline);
         setAddClick(() => false);
         console.log(taskList);
     }
@@ -23,9 +24,11 @@ function App() {
             <Header toggle={toggle} setToggle={setToggle} />
             {toggle ? <AddTask setInput={setInput} setAddClick={setAddClick} /> : null}
             <Block className="tasks">
-                {taskList.map((task) => {
-                    return <Tasks key={task} task={task} />;
-                })}
+                {taskList
+                    .sort((a, b) => (a.datetime > b.datetime ? 1 : -1))
+                    .map((task) => {
+                        return <Tasks key={task} task={task} />;
+                    })}
             </Block>
         </Box>
     );
