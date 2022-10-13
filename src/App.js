@@ -14,9 +14,7 @@ function App() {
 
     if (addClick) {
         taskList.push(input);
-        console.log(taskList.sort((a, b) => new Date(b.deadline) - new Date(a.deadline)));
         setAddClick(() => false);
-        console.log(taskList);
     }
 
     return (
