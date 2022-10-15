@@ -6,27 +6,25 @@ import AddTask from "./components/addTask/AddTask";
 import { Box, Block } from "react-bulma-components";
 import Tasks from "./components/tasks/Tasks";
 
-const taskList = [];
 function App() {
     const [toggle, setToggle] = useState(true);
-    const [input, setInput] = useState({ task: "", deadline: "" });
-    const [addClick, setAddClick] = useState(false);
-
-    if (addClick) {
-        taskList.push(input);
-        setAddClick(() => false);
-    }
+    const [taskList, setTaskList] = useState([]);
 
     return (
         <Box id="box" className="column is-two-fifths">
             <Header toggle={toggle} setToggle={setToggle} />
-            {toggle ? <AddTask setInput={setInput} setAddClick={setAddClick} /> : null}
+            {toggle && <AddTask taskList={taskList} setTaskList={setTaskList} />}
             <Block className="tasks">
-                {taskList
-                    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
-                    .map((task) => {
-                        return <Tasks key={task} task={task} />;
-                    })}
+                {taskList.map((task) => {
+                    return (
+                        <Tasks
+                            key={task.id}
+                            task={task}
+                            taskList={taskList}
+                            setTaskList={setTaskList}
+                        />
+                    );
+                })}
             </Block>
         </Box>
     );

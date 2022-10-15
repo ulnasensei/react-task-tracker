@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button } from "react-bulma-components";
 import "./AddTask.css";
 
-const AddTask = ({ setInput, setAddClick }) => {
-    const [task, setTask] = useState("");
-    const [deadline, setDeadline] = useState("");
+const AddTask = ({ taskList, setTaskList }) => {
     return (
         <>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    setInput({ task: task, deadline: deadline });
-                    setAddClick(true);
+                    setTaskList(
+                        [
+                            ...taskList,
+                            {
+                                task: e.target.task.value,
+                                deadline: e.target.deadline.value,
+                                id: Date.now(),
+                                isDone: false,
+                            },
+                        ].sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+                    );
                 }}
             >
                 <Form.Field>
@@ -20,8 +27,7 @@ const AddTask = ({ setInput, setAddClick }) => {
                         <Form.Input
                             type="text"
                             placeholder="Make a sandwich"
-                            value={task}
-                            onChange={(e) => setTask(e.target.value)}
+                            name="task"
                             required
                         />
                     </Form.Control>
@@ -32,15 +38,16 @@ const AddTask = ({ setInput, setAddClick }) => {
                         <Form.Input
                             type="datetime-local"
                             placeholder="Oct 14, 09:00"
-                            value={deadline}
-                            onChange={(e) => setDeadline(e.target.value)}
+                            name="deadline"
                             required
                         />
                     </Form.Control>
                 </Form.Field>
                 <Form.Field>
                     <Form.Control>
-                        <Button color="link">Add</Button>
+                        <Button type="submit" color="link">
+                            Add
+                        </Button>
                     </Form.Control>
                 </Form.Field>
             </form>
