@@ -12,9 +12,9 @@ const Tasks = ({ task, taskList, setTaskList }) => {
             size={"full"}
             className="task"
             onClick={() =>
-                setTaskList(
-                    taskList.map(
-                        (item) => task.id === item.id && [...{ ...item, isDone: !item.isDone }]
+                setTaskList((list) =>
+                    list.map((item) =>
+                        task.id === item.id ? { ...item, isDone: !item.isDone } : { ...item }
                     )
                 )
             }
@@ -23,9 +23,9 @@ const Tasks = ({ task, taskList, setTaskList }) => {
                 <span>{task.deadline}</span>{" "}
                 <Button
                     remove
-                    // onClick={() =>
-                    //     setTaskList(taskList.filter((item) => item.id !== task.id && item))
-                    // }
+                    onClick={() =>
+                        setTaskList((list) => list.filter((item) => item.id !== task.id))
+                    }
                 />
             </Message.Header>
             <Message.Body className="taskBody">
