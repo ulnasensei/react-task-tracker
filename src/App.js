@@ -16,14 +16,7 @@ function App() {
             {toggle && <AddTask taskList={taskList} setTaskList={setTaskList} />}
             <Block className="tasks">
                 {taskList.map((task) => {
-                    return (
-                        <Tasks
-                            key={task.id}
-                            task={task}
-                            taskList={taskList}
-                            setTaskList={setTaskList}
-                        />
-                    );
+                    return <Tasks key={task.id} task={task} setTaskList={setTaskList} />;
                 })}
             </Block>
         </Box>

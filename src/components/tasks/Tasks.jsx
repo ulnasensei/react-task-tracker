@@ -1,7 +1,7 @@
 import React from "react";
 import { Message, Button } from "react-bulma-components";
 import "./Tasks.css";
-const Tasks = ({ task, taskList, setTaskList }) => {
+const Tasks = ({ task, setTaskList }) => {
     const taskStyle = {
         textDecoration: task.isDone ? "line-through" : "none",
     };

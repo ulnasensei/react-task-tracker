@@ -8,17 +8,20 @@ const AddTask = ({ taskList, setTaskList }) => {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    setTaskList(
-                        [
-                            ...taskList,
-                            {
-                                task: e.target.task.value,
-                                deadline: e.target.deadline.value,
-                                id: Date.now(),
-                                isDone: false,
-                            },
-                        ].sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
-                    );
+                    const { task, deadline } = e.target;
+                    const isPast = Date.now() > new Date(deadline.value).getTime();
+                    !isPast &&
+                        setTaskList(
+                            [
+                                ...taskList,
+                                {
+                                    task: task.value,
+                                    deadline: deadline.value.replace("T", " "),
+                                    id: Date.now(),
+                                    isDone: false,
+                                },
+                            ].sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+                        );
                 }}
             >
                 <Form.Field>
